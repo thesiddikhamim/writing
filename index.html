@@ -1,25 +1,21 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IELTS Writing Assessor — Gemini</title>
+  <title>IELTS Writing Assessor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#000000; --card:#000000; --muted:#000000; --ink:#ffffff; --ink-dim:#7FF7F3; --accent:#5c9dff; --accent-2:#7af0d9;
-      --bad:#ff6b6b; --ok:#ffd36b; --good:#68f08a; --border:#223146;
+      --bg:#000000; --card:#000000; --muted:#000000; --ink:#ffffff; --ink-dim:#977ff7; --accent:#977ff7; --accent-2:#977ff7;
+      --bad:#f81c1c; --ok:#ffd36b; --good:#68f08a; --border:#223146;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:linear-gradient(180deg,#081018, #0b0f14 30%, #0b0f14);
+      background:linear-gradient(180deg,#000000, #000000 30%, #000000);
       color:var(--ink);
     }
     .wrap{max-width:1200px; margin:32px auto; padding:0 16px;}
@@ -31,7 +27,7 @@
     }
     .pill{font-size:12px; padding:4px 8px; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#04111a; font-weight:700}
     .card{
-      background:linear-gradient(180deg, rgba(124,168,255,0.07), transparent 30%), var(--card);
+      background:linear-gradient(180deg, rgba(0, 0, 0, 0.07), transparent 30%), var(--card);
       border:1px solid var(--border);
       border-radius:18px; padding:16px;
       box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.03);
@@ -57,7 +53,7 @@
     }
     .btn:hover{box-shadow:0 6px 18px rgba(0,0,0,.35)}
     .btn:active{transform:translateY(1px)}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#031018; border:none}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#000000; border:none}
     .btn.ghost{background:transparent}
     .hint{font-size:12px; color:var(--ink-dim); margin-top:6px}
     .results{display:grid; gap:16px; margin-top:16px}
@@ -92,7 +88,7 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="title">IELTS Writing Assessor <span class="pill">Gemini</span></div>
+      <div class="title">IELTS Writing<span class="pill"></span></div>
       <div class="chips">
         <span class="chip">Task 1 &amp; Task 2</span>
         <span class="chip">JSON-parsed feedback</span>
@@ -107,7 +103,7 @@
           <div>
             <label>Gemini API Key</label>
             <input id="apiKey" type="password" placeholder="AIza... (stored locally)" />
-            <div class="hint mono">Your key is stored in browser localStorage. Calls go directly from your browser to Google.</div>
+            <div class="hint mono">Saved Locally</div>
           </div>
           <div>
             <label>Model</label>
@@ -152,7 +148,7 @@
         <textarea id="essay" placeholder="Paste or write your full response here..."></textarea>
 
         <div class="controls">
-          <button class="btn primary" id="assessBtn">🚀 Assess Writing</button>
+          <button class="btn primary" id="assessBtn">Assess Writing</button>
           <button class="btn" id="clearBtn">Clear</button>
           <button class="btn ghost" id="saveBtn">Save API Key</button>
         </div>
@@ -177,14 +173,21 @@
           <div class="crit" id="crit-cc" data-band=""><h3>2) Coherence & Cohesion</h3><div class="content"></div></div>
           <div class="crit" id="crit-lr" data-band=""><h3>3) Lexical Resource</h3><div class="content"></div></div>
           <div class="crit" id="crit-gra" data-band=""><h3>4) Grammatical Range & Accuracy</h3><div class="content"></div></div>
+          
           <div class="card" style="background:transparent; border-style:dashed">
             <h3 style="margin:0 0 8px 0">Inline Issues</h3>
             <div class="hint">Problematic excerpts detected in your writing are highlighted below with reasons.</div>
             <div id="inlinePreview" class="essay-preview" style="margin-top:10px"></div>
           </div>
+       
           <div class="card" style="background:transparent; border-style:dashed">
             <h3 style="margin:0 0 8px 0">All Errors & Suggestions</h3>
             <ol id="errorsList" class="errors"></ol>
+          </div>
+           <div class="card" style="background:transparent; border-style:dashed">
+            <h3 style="margin:0 0 8px 0">Band 9 Model Answer</h3>
+            <div class="hint">This is a rewritten version of your essay, demonstrating how to achieve a top score.</div>
+            <div id="refinedEssay" class="essay-preview" style="margin-top:10px"></div>
           </div>
           <details>
             <summary class="small">Show raw JSON (debug)</summary>
@@ -333,7 +336,7 @@ el('clearBtn').addEventListener('click', ()=>{
   el('essay').value=''; el('customTopic').value='';
   el('overallBand').textContent='–'; el('breakdownChips').innerHTML='';
   ['crit-ta','crit-cc','crit-lr','crit-gra'].forEach(id=>{ const c=el(id); c.dataset.band=""; c.classList.remove('good','ok','bad'); c.querySelector('.content').innerHTML=""; });
-  el('inlinePreview').innerHTML=''; el('errorsList').innerHTML=''; el('rawJson').textContent=''; setStatus('');
+  el('inlinePreview').innerHTML=''; el('errorsList').innerHTML=''; el('rawJson').textContent=''; el('refinedEssay').innerHTML=''; setStatus('');
 });
 el('saveBtn').addEventListener('click', ()=>{
   localStorage.setItem('gemini_api_key', el('apiKey').value.trim());
@@ -406,13 +409,15 @@ Schema (use these exact keys):
   "grammar_errors": [ { "error": "string", "why": "string", "fix": "string" } ],
   "vocabulary_suggestions": [ { "weak": "string", "better": "string", "why": "string" } ],
   "cohesion_suggestions": [ { "issue": "string", "fix": "string" } ],
-  "task_specific_advice": "string"
+  "task_specific_advice": "string",
+  "refined_essay": "string"
 }
 
 Scoring rules:
 - For Task ${taskType}: assess ${taskType==="1"?"Task Achievement (TA)":"Task Response (TR)"}.
 - Use 0–9 bands including .5.
 - Be consistent with IELTS descriptors (relevance, clear position, idea development, paragraphing; cohesion; vocabulary range/accuracy; grammar range/accuracy/punctuation).
+- Rewrite the user's essay to a Band 9 level, keeping their core ideas but improving structure, vocabulary, and grammar. Place this in the 'refined_essay' field.
 - If a target band is provided, add advice to reach that band.
 - IMPORTANT: Output MUST be valid JSON only.
 
@@ -421,7 +426,8 @@ Task: ${taskType}
 Target band: ${targetBand || "none"}
 Topic: ${topic}
 
-Essay:\n"""${essay}"""`;
+Essay:
+"""${essay}"""`;
 }
 
 /************************* Renderers *************************/
@@ -449,6 +455,15 @@ function renderInline(essay, inline){
     html = html.replace(re, m=>`<span class="inline-err" title="${esc(a.reason||'Issue')} → ${esc(a.fix||'Fix')}">${esc(m)}</span>`);
   });
   el('inlinePreview').innerHTML = html;
+}
+
+function renderRefinedEssay(text){
+  const container = el('refinedEssay');
+  if (text && typeof text === 'string' && text.trim() !== '') {
+    container.textContent = text;
+  } else {
+    container.innerHTML = '<span class="hint">No refined essay was provided by the model.</span>';
+  }
 }
 
 function renderErrors(all){
@@ -511,6 +526,7 @@ el('assessBtn').addEventListener('click', async ()=>{
     // Inline highlights and lists
     renderInline(essay, obj?.inline_annotations);
     renderErrors(obj);
+    renderRefinedEssay(obj?.refined_essay);
 
     // Raw JSON
     el('rawJson').textContent = JSON.stringify(obj, null, 2);
