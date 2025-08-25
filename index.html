@@ -92,46 +92,57 @@
   <div class="wrap">
     <header>
       <div class="title">IELTS Writing<span class="pill"></span></div>
-      <div class="chips">
-        <span class="chip">Task 2 Essays</span>
-        <span class="chip">JSON-parsed feedback</span>
-        <span class="chip">100+ topics</span>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div class="chips">
+          <span class="chip">Task 2 Essays</span>
+          <span class="chip">JSON-parsed feedback</span>
+          <span class="chip">100+ topics</span>
+        </div>
+        <button id="settingsBtn" class="btn ghost" title="Settings" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
       </div>
     </header>
+
+    <div id="settingsPanel" class="card" style="display: none; margin-bottom: 16px;">
+      <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3 style="margin:0;">Settings</h3>
+        <button id="closeSettingsBtn" title="Close Settings" class="btn ghost" style="width: auto; padding: 4px 8px; font-size: 20px; line-height: 1;">&times;</button>
+      </div>
+      <div class="row">
+        <div>
+          <label>Gemini API Key</label>
+          <input id="apiKey" type="password" placeholder="AIza... (stored locally)" />
+          <div class="hint mono">Saved Locally</div>
+        </div>
+        <div>
+          <label>Model</label>
+          <input id="modelName" type="text" value="gemini-2.5-flash" />
+          <div class="hint mono">Use a model you have access to.</div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <div>
+          <label>Target Band (optional)</label>
+          <select id="targetBand">
+            <option value="">— none —</option>
+            <option>6.0</option><option>6.5</option><option>7.0</option><option>7.5</option>
+            <option>8.0</option><option>8.5</option><option>9.0</option>
+          </select>
+          <div class="hint small">Advice will be tailored to this goal.</div>
+        </div>
+        <div>
+          <label>Max Output Tokens</label>
+          <input id="maxTokens" type="number" value="1000000" min="256" step="128" />
+        </div>
+      </div>
+      <div class="controls" style="margin-top: 16px; justify-content: flex-end;">
+          <button class="btn ghost" id="saveBtn">Save API Key</button>
+      </div>
+    </div>
 
     <div class="grid">
       <!-- LEFT: Inputs -->
       <section class="card">
-        <div class="row">
-          <div>
-            <label>Gemini API Key</label>
-            <input id="apiKey" type="password" placeholder="AIza... (stored locally)" />
-            <div class="hint mono">Saved Locally</div>
-          </div>
-          <div>
-            <label>Model</label>
-            <input id="modelName" type="text" value="gemini-2.5-flash" />
-            <div class="hint mono">Use a model you have access to.</div>
-          </div>
-        </div>
-
-        <div class="row" style="margin-top:8px">
-          <div>
-            <label>Target Band (optional)</label>
-            <select id="targetBand">
-              <option value="">— none —</option>
-              <option>6.0</option><option>6.5</option><option>7.0</option><option>7.5</option>
-              <option>8.0</option><option>8.5</option><option>9.0</option>
-            </select>
-            <div class="hint small">Advice will be tailored to this goal.</div>
-          </div>
-          <div>
-            <label>Max Output Tokens</label>
-            <input id="maxTokens" type="number" value="1000000" min="256" step="128" />
-          </div>
-        </div>
-
-        <label style="margin-top:12px">Choose an IELTS Topic</label>
+        <label>Choose an IELTS Topic</label>
         <div class="topic-bar">
           <select id="topicSelect"></select>
           <button class="btn" id="randTopic" title="Random topic">Random</button>
@@ -146,7 +157,6 @@
         <div class="controls">
           <button class="btn primary" id="assessBtn">Assess Writing</button>
           <button class="btn" id="clearBtn">Clear</button>
-          <button class="btn ghost" id="saveBtn">Save API Key</button>
         </div>
         <div id="status" class="hint mono" style="margin-top:8px"></div>
       </section>
@@ -533,6 +543,13 @@ el('assessBtn').addEventListener('click', async ()=>{
     setStatus('❌ ' + (err?.message || err));
   }
 });
+
+/************************* Settings Panel *************************/
+const settingsBtn = el('settingsBtn');
+const closeSettingsBtn = el('closeSettingsBtn');
+const settingsPanel = el('settingsPanel');
+settingsBtn.addEventListener('click', () => { settingsPanel.style.display = 'block'; });
+closeSettingsBtn.addEventListener('click', () => { settingsPanel.style.display = 'none'; });
 </script>
 </body>
 </html>
