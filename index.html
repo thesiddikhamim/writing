@@ -8,14 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#ffffff; --card:#ffffff; --muted:#000000; --ink:#000000; --ink-dim:#977ff7; --accent:#977ff7; --accent-2:#977ff7;
-      --bad:#f81c1c; --ok:#ffd36b; --good:#68f08a; --border:#ffffff;
+      --bg:#000000; --card:#000000; --muted:#000000; --ink:#ffffff; --ink-dim:#977ff7; --accent:#977ff7; --accent-2:#977ff7;
+      --bad:#f81c1c; --ok:#ffd36b; --good:#68f08a; --border:#223146;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:linear-gradient(180deg,#ffffff, #ffffff 30%, #ffffff);
+      background:linear-gradient(180deg,#000000, #000000 30%, #000000);
       color:var(--ink);
     }
     .wrap{max-width:1200px; margin:32px auto; padding:0 16px;}
@@ -27,10 +27,10 @@
     }
     .pill{font-size:12px; padding:4px 8px; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#04111a; font-weight:700}
     .card{
-      background:linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 30%), var(--card);
+      background:linear-gradient(180deg, rgba(0, 0, 0, 0.07), transparent 30%), var(--card);
       border:1px solid var(--border);
       border-radius:18px; padding:16px;
-      box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.03);
     }
     .grid{
       display:grid; gap:16px;
@@ -41,17 +41,17 @@
     }
     label{display:block; font-size:13px; color:var(--ink-dim); margin:10px 0 6px;}
     input, select, textarea, button{
-      width:100%; padding:12px 14px; border-radius:12px; border:#000000 1px solid ;
-      background:#ffffff; color:var(--ink); font-size:14px; outline:none;
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border);
+      background:var(--muted); color:var(--ink); font-size:14px; outline:none;
     }
     textarea{min-height:160px; resize:vertical; line-height:1.5}
     .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
     .controls{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
     .btn{
-      width:auto; cursor:pointer; border:1px solid var(--border); background: var(--accent);
+      width:auto; cursor:pointer; border:1px solid var(--border); background:linear-gradient(180deg,#182332,#151e2b);
       transition:transform .05s ease, box-shadow .2s ease; font-weight:700;
     }
-    .btn:hover{box-shadow:0 6px 18px rgba(255, 255, 255, 0.35)}
+    .btn:hover{box-shadow:0 6px 18px rgba(0,0,0,.35)}
     .btn:active{transform:translateY(1px)}
     .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#000000; border:none}
     .btn.ghost{background:transparent}
@@ -77,10 +77,7 @@
     .chip{font-size:12px; padding:4px 8px; border-radius:999px; background:#0f1723; border:1px solid var(--border); color:var(--ink-dim)}
     .errors li{margin:6px 0}
     .badge{display:inline-block; padding:2px 8px; border-radius:999px; background:#0e1520; border:1px solid var(--border); font-size:12px; color:var(--ink-dim)}
-    .inline-err { padding: 1px 2px; border-radius: 3px; }
-    .inline-err-grammar { background: rgba(248, 28, 28, 0.15); border-bottom: 2px solid var(--bad); }
-    .inline-err-vocabulary { background: rgba(104, 240, 138, 0.2); }
-    .inline-err-cohesion { background: rgba(255, 211, 107, 0.25); }
+    .inline-err{background: rgba(255, 107, 107, .12); border-bottom:2px solid var(--bad); border-radius:4px; padding:0 2px}
     .essay-preview{white-space:pre-wrap; line-height:1.65}
     .footer{margin:24px 0 12px; text-align:center; color:var(--ink-dim); font-size:12px}
     .topic-bar{display:grid; gap:10px}
@@ -96,7 +93,11 @@
     <header>
       <div class="title">IELTS Writing<span class="pill"></span></div>
       <div style="display: flex; align-items: center; gap: 16px;">
-      
+        <div class="chips">
+          <span class="chip">Task 2 Essays</span>
+          <span class="chip">JSON-parsed feedback</span>
+          <span class="chip">100+ topics</span>
+        </div>
         <button id="settingsBtn" class="btn ghost" title="Settings" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
       </div>
     </header>
@@ -410,7 +411,7 @@ Schema (use these exact keys):
     "lexical_resource": { "band": number, "summary": "string", "issues": ["string"], "advice": ["string"] },
     "grammatical_range_accuracy": { "band": number, "summary": "string", "issues": ["string"], "advice": ["string"] }
   },
-  "inline_annotations": [ { "quote": "exact substring (<=20 words)", "type": "grammar" | "vocabulary" | "cohesion", "reason": "string", "fix": "string" } ],
+  "inline_annotations": [ { "quote": "exact substring (<=20 words)", "reason": "string", "fix": "string" } ],
   "grammar_errors": [ { "error": "string", "why": "string", "fix": "string" } ],
   "vocabulary_suggestions": [ { "weak": "string", "better": "string", "why": "string" } ],
   "cohesion_suggestions": [ { "issue": "string", "fix": "string" } ],
@@ -456,10 +457,8 @@ function renderInline(essay, inline){
   let html = esc(essay);
   inline.forEach(a=>{
     const q = a?.quote || ''; if (!q) return;
-    const type = a?.type || 'grammar'; // Default to grammar if type is missing
-    const className = `inline-err inline-err-${type}`;
     const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
-    html = html.replace(re, m=>`<span class="${className}" title="${esc(a.reason||'Issue')} → ${esc(a.fix||'Fix')}">${esc(m)}</span>`);
+    html = html.replace(re, m=>`<span class="inline-err" title="${esc(a.reason||'Issue')} → ${esc(a.fix||'Fix')}">${esc(m)}</span>`);
   });
   el('inlinePreview').innerHTML = html;
 }
