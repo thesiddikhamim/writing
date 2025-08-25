@@ -86,14 +86,14 @@
     .inline-err:hover::after,
     .inline-err:active::after { 
       content: attr(title);
-      position: absolute;
-      bottom: 100%;
+      position: fixed;
+      bottom: 50%;
       left: 50%;
       transform: translateX(-50%);
       padding: 6px 10px;
       border-radius: 6px;
-      background: #182332;
-      border: 1px solid var(--border);
+      background: #000000;
+      border: 1px solid var(--accent);
       color: var(--ink);
       font-size: 12px;
       white-space: normal; /* Changed from pre-wrap to normal */
