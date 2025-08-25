@@ -77,7 +77,33 @@
     .chip{font-size:12px; padding:4px 8px; border-radius:999px; background:#0f1723; border:1px solid var(--border); color:var(--ink-dim)}
     .errors li{margin:6px 0}
     .badge{display:inline-block; padding:2px 8px; border-radius:999px; background:#0e1520; border:1px solid var(--border); font-size:12px; color:var(--ink-dim)}
-    .inline-err { padding: 0 2px; border-radius: 2px; }
+    .inline-err { 
+      padding: 0 2px; 
+      border-radius: 2px; 
+      cursor: pointer; 
+      position: relative;
+    }
+    .inline-err:hover::after,
+    .inline-err:active::after { 
+      content: attr(title);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #182332;
+      border: 1px solid var(--border);
+      color: var(--ink);
+      font-size: 12px;
+      white-space: normal; /* Changed from pre-wrap to normal */
+      min-width: 200px;    /* Added minimum width */
+      max-width: 400px;    /* Increased max width */
+      width: max-content;  /* Added to ensure content fits */
+      z-index: 100;
+      transition: none;
+      line-height: 1.4;   /* Added to control height */
+    }
     .inline-err-grammar { background: rgba(248, 28, 28, 0.15); border-bottom: 2px solid var(--bad); }
     .inline-err-vocabulary { border-bottom: 2px solid var(--good); }
     .inline-err-cohesion { border-bottom: 2px solid var(--ok); }
@@ -185,7 +211,7 @@
           
           <div class="card" style="background:transparent; border-style:dashed">
             <h3 style="margin:0 0 8px 0">Inline Issues</h3>
-            <div class="hint">Problematic excerpts detected in your writing are highlighted below with reasons.</div>
+            <div class="hint">Problematic excerpts detected in your writing are highlighted below. Click an issue to see details.</div>
             <div id="inlinePreview" class="essay-preview" style="margin-top:10px"></div>
           </div>
        
@@ -462,8 +488,11 @@ function renderInline(essay, inline){
     const q = a?.quote || ''; if (!q) return;
     const type = a?.type || 'grammar'; // Default to grammar if type is missing
     const className = `inline-err inline-err-${type}`;
+    const reason = a.reason||'Issue';
+    const fix = a.fix||'Fix';
+    const title = `Reason: ${reason}\nSuggested Fix: ${fix}`;
     const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
-    html = html.replace(re, m=>`<span class="${className}" title="${esc(a.reason||'Issue')} → ${esc(a.fix||'Fix')}">${esc(m)}</span>`);
+    html = html.replace(re, m=>`<span class="${className}" title="${esc(title)}">${esc(m)}</span>`);
   });
   el('inlinePreview').innerHTML = html;
 }
