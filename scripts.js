@@ -210,9 +210,19 @@ Schema (use these exact keys):
   "grammar_errors": [ { "error": "string", "why": "string", "fix": "string" } ],
   "vocabulary_suggestions": [ { "weak": "string", "better": "string", "why": "string" } ],
   "cohesion_suggestions": [ { "issue": "string", "fix": "string" } ],
+  "spelling_errors": [ { "error": "string", "fix": "string" } ],
   "task_specific_advice": "string",
   "refined_essay": "string"
 }
+
+Annotation Guidelines:
+- For "inline_annotations", find the exact quote from the essay.
+- Use the "type" field to categorize the issue:
+  - "spelling": A simple spelling mistake.
+  - "grammar": An error in sentence structure, tense, punctuation, articles, etc.
+  - "vocabulary": A word that is used incorrectly or could be improved (e.g., less common, more precise). This is for word improvements.
+  - "cohesion": An issue with linking ideas, sentence flow, or logical connection. This is for making sentences better.
+- Populate the detailed error lists ("grammar_errors", "vocabulary_suggestions", "cohesion_suggestions", "spelling_errors") based on these findings.
 
 Scoring rules:
 - For Task ${taskType}: assess ${taskType==="1"?"Task Achievement (TA)":"Task Response (TR)"}.
