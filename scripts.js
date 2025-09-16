@@ -361,7 +361,7 @@ el('assessBtn').addEventListener('click', async ()=>{
     renderRefinedEssay(obj?.refined_essay);
 
     // Raw JSON
-    el('rawJson').textContent = JSON.stringify(obj, null, 2);
+    // el('rawJson').textContent = JSON.stringify(obj, null, 2);
 
     setStatus('✅ Assessment complete.');
   }catch(err){
