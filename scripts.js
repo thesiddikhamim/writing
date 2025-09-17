@@ -172,7 +172,7 @@ el('clearBtn').addEventListener('click', ()=>{
   el('essay').value=''; el('customTopic').value=''; el('topicSelect').selectedIndex = 0;
   el('overallBand').textContent='–'; el('breakdownChips').innerHTML='';
   ['crit-ta','crit-cc','crit-lr','crit-gra'].forEach(id=>{ const c=el(id); c.dataset.band=""; c.classList.remove('good','ok','bad'); c.querySelector('.content').innerHTML=""; });
-  el('inlinePreview').innerHTML=''; el('errorsList').innerHTML=''; el('refinedEssay').innerHTML=''; setStatus('');
+  el('inlinePreview').innerHTML=''; el('errorsList').innerHTML=''; el('refinedEssay').innerHTML=''; el('generalBand9Essay').innerHTML=''; setStatus('');
   toggleCustomTopic();
 });
 el('saveBtn').addEventListener('click', ()=>{
@@ -256,7 +256,8 @@ Schema (use these exact keys):
   "cohesion_suggestions": [ { "issue": "string", "fix": "string" } ],
   "spelling_errors": [ { "error": "string", "fix": "string" } ],
   "task_specific_advice": "string",
-  "refined_essay": "string"
+  "refined_essay": "string",
+  "general_band9_essay": "string"
 }
 
 Annotation Guidelines:
@@ -273,6 +274,7 @@ Scoring rules:
 - Use 0–9 bands including .5.
 - Be consistent with IELTS descriptors (relevance, clear position, idea development, paragraphing; cohesion; vocabulary range/accuracy; grammar range/accuracy/punctuation).
 - Rewrite the user's essay to a Band 9 level, keeping their core ideas but improving structure, vocabulary, and grammar. Place this in the 'refined_essay' field.
+- Additionally, write a completely new, independent Band 9 model answer on the same topic. Place this in the 'general_band9_essay' field.
 - If a target band is provided, add advice to reach that band.
 - IMPORTANT: Output MUST be valid JSON only.
 
@@ -322,12 +324,12 @@ function renderInline(essay, inline){
   el('inlinePreview').innerHTML = html;
 }
 
-function renderRefinedEssay(text){
-  const container = el('refinedEssay');
+function renderModelAnswer(elementId, text, defaultMessage) {
+  const container = el(elementId);
   if (text && typeof text === 'string' && text.trim() !== '') {
     container.textContent = text;
   } else {
-    container.innerHTML = '<span class="hint">No refined essay was provided by the model.</span>';
+    container.innerHTML = `<span class="hint">${defaultMessage}</span>`;
   }
 }
 
@@ -402,7 +404,8 @@ el('assessBtn').addEventListener('click', async ()=>{
     // Inline highlights and lists
     renderInline(essay, obj?.inline_annotations);
     renderErrors(obj);
-    renderRefinedEssay(obj?.refined_essay);
+    renderModelAnswer('refinedEssay', obj?.refined_essay, 'No refined essay was provided by the model.');
+    renderModelAnswer('generalBand9Essay', obj?.general_band9_essay, 'No general model answer was provided by the model.');
 
     // Raw JSON
     // el('rawJson').textContent = JSON.stringify(obj, null, 2);

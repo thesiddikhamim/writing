@@ -51,7 +51,7 @@
         </div>
         <div>
           <label>Max Output Tokens</label>
-          <input id="maxTokens" type="number" value="1000000" min="256" step="128" />
+          <input id="maxTokens" type="number" value="10000000" min="256" step="128" />
         </div>
       </div>
       <div class="controls" style="margin-top: 16px; justify-content: flex-end;">
@@ -119,9 +119,14 @@
             <ol id="errorsList" class="errors"></ol>
           </div>
            <div class="card" style="background:transparent; border-style:dashed">
-            <h3 style="margin:0 0 8px 0">Band 9 Model Answer</h3>
-            <div class="hint">This is a rewritten version of your essay, demonstrating how to achieve a top score.</div>
+            <h3 style="margin:0 0 8px 0">Your Refined Essay</h3>
+            <div class="hint">This is your own essay, rewritten to a Band 9 level while keeping your core ideas.</div>
             <div id="refinedEssay" class="essay-preview" style="margin-top:10px"></div>
+          </div>
+          <div class="card" style="background:transparent; border-style:dashed">
+            <h3 style="margin:0 0 8px 0">Band 9 Answer</h3>
+            <div class="hint">This is an independently written Band 9 model answer for the same topic.</div>
+            <div id="generalBand9Essay" class="essay-preview" style="margin-top:10px"></div>
           </div>
           <!-- <details>
             <summary class="small">Show raw JSON (debug)</summary>
