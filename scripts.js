@@ -100,6 +100,16 @@ const IELTS_TOPICS = [
   "Young people should volunteer in their communities. Discuss."
 ];
 
+// Your personal list of topics
+const PERSONAL_TOPICS = [
+  "The impact of artificial intelligence on the job market.",
+  "Should governments prioritize economic growth or environmental protection?",
+  "The role of social media in modern politics.",
+  "Is a formal university education necessary for success in life?",
+  "The challenges and benefits of remote work."
+];
+
+
 /************************* Helpers *************************/
 const el = id => document.getElementById(id);
 function setStatus(msg){ el('status').textContent = msg || ""; }
@@ -108,13 +118,28 @@ function chip(label){ const s=document.createElement('span'); s.className='chip'
 function esc(s){ return (s||"").toString().replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
 
 /************************* Populate topics *************************/
-(function initTopics(){
+function populateTopics(system = 'ielts') {
   const sel = el('topicSelect');
+  sel.innerHTML = ''; // Clear existing options
+
+  const topics = system === 'ielts' ? IELTS_TOPICS : PERSONAL_TOPICS;
+  const placeholderText = system === 'ielts' ? "— Choose an IELTS topic —" : "— Choose a Personal topic —";
+
   const base = document.createElement('option');
-  base.value=""; base.textContent="— Choose an IELTS topic —";
+  base.value = "";
+  base.textContent = placeholderText;
   sel.appendChild(base);
-  IELTS_TOPICS.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
-})();
+
+  topics.forEach(t => {
+    const o = document.createElement('option');
+    o.value = t;
+    o.textContent = t;
+    sel.appendChild(o);
+  });
+}
+
+// Initial population
+populateTopics();
 
 /************************* Local storage *************************/
 (function restore(){
@@ -128,10 +153,17 @@ function toggleCustomTopic(){
   el('customTopicGroup').style.display = showCustom ? 'block' : 'none';
 }
 
+el('writingSystem').addEventListener('change', (e) => {
+  populateTopics(e.target.value);
+  toggleCustomTopic();
+});
+
 el('topicSelect').addEventListener('change', toggleCustomTopic);
 
 el('randTopic').addEventListener('click', ()=>{
-  const idx = 1 + Math.floor(Math.random() * IELTS_TOPICS.length);
+  const system = el('writingSystem').value;
+  const topics = system === 'ielts' ? IELTS_TOPICS : PERSONAL_TOPICS;
+  const idx = 1 + Math.floor(Math.random() * topics.length);
   el('topicSelect').selectedIndex = idx; el('customTopic').value = '';
   toggleCustomTopic();
 });

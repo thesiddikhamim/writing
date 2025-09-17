@@ -62,7 +62,13 @@
     <div class="grid">
       <!-- LEFT: Inputs -->
       <section class="card">
-        <label>Choose an IELTS Topic</label>
+        <label>1. Select Writing System</label>
+        <select id="writingSystem">
+          <option value="ielts" selected>IELTS Task 2 Topics</option>
+          <option value="personal">Personal Topics</option>
+        </select>
+
+        <label style="margin-top:10px">2. Choose a Topic</label>
         <div class="topic-bar">
           <select id="topicSelect"></select>
           <button class="btn" id="randTopic" title="Random topic">Random</button>
@@ -73,7 +79,7 @@
           <textarea id="customTopic" placeholder="e.g., Some people think the best way to reduce crime is to give longer prison sentences. Others believe there are better ways to reduce crime. Discuss both views and give your own opinion."></textarea>
         </div>
 
-        <label style="margin-top:10px">Your Writing</label>
+        <label style="margin-top:10px">3. Your Writing</label>
         <textarea id="essay" placeholder="Paste or write your full response here..."></textarea>
 
         <div class="controls">
