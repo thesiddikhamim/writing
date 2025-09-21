@@ -10,17 +10,19 @@ const IELTS_TOPICS = [
   "Studying abroad brings more advantages than disadvantages. Discuss both sides.",
   "Universities should accept equal numbers of male and female students in every subject. Do you agree?",
   "The main purpose of education is to prepare people for the workplace. How far do you agree?",
+
   // Technology
   "The growth of social media has damaged face-to-face communication. To what extent do you agree?",
   "Artificial intelligence will create more jobs than it destroys. Discuss both sides and give your opinion.",
   "Governments should regulate screen time for children. To what extent do you agree?",
   "Technology has made people less creative. Do you agree or disagree?",
-  "Cybersecurity should be taught in schools. Do you agree?",
-  "Facial recognition in public spaces should be banned. Discuss.",
   "People rely too much on smartphones. To what extent do you agree?",
   "Space exploration is a waste of resources. Discuss both views.",
   "Digital payments will replace cash completely. Do you agree?",
   "Online privacy is more important than national security. Discuss.",
+  "Facial recognition in public spaces should be banned. Discuss.",
+  "Cybersecurity should be taught in schools. Do you agree?",
+
   // Environment
   "Climate change is the biggest threat facing humanity. Do you agree or disagree?",
   "Plastic bans are effective in reducing pollution. Discuss both sides and give your opinion.",
@@ -32,6 +34,7 @@ const IELTS_TOPICS = [
   "Ecotourism brings more harm than good. To what extent do you agree?",
   "Nuclear energy is the answer to the energy crisis. Discuss both sides.",
   "Recycling is not enough; we must reduce consumption. Do you agree?",
+
   // Health
   "Governments should tax sugary drinks to improve public health. Do you agree?",
   "Mental health should be treated on par with physical health. Discuss.",
@@ -43,7 +46,8 @@ const IELTS_TOPICS = [
   "Universal healthcare should be a basic right. Discuss both views.",
   "The fitness industry does more harm than good. Discuss.",
   "Schools should provide free nutritious lunches. To what extent do you agree?",
-  // Society
+
+  // Society & Work
   "Crime can be reduced with longer prison sentences. Others say education and rehabilitation are better. Discuss both views and give your opinion.",
   "Censorship of the internet is necessary in some cases. Discuss.",
   "Aging populations will cause serious problems for society. Discuss solutions.",
@@ -53,61 +57,73 @@ const IELTS_TOPICS = [
   "Tourism brings more benefits than problems. Discuss both sides.",
   "City life is better than country life. Discuss both views.",
   "Consumerism is damaging our society. Do you agree?",
-  "People today are less happy than in the past. Discuss.",
-  // Work & Economy
-  "Remote work will remain the norm. Do you agree or disagree?",
-  "A universal basic income is the best response to automation. Discuss.",
-  "Job satisfaction is more important than job security. To what extent do you agree?",
-  "Employers should monitor employees’ emails and internet use. Do you agree?",
-  "Gig-economy jobs exploit workers. Discuss.",
-  "Globalization has more benefits than drawbacks. Discuss both views.",
-  "Tourism is a vital source of income but can ruin local cultures. Discuss.",
-  "International trade should be fairer rather than freer. Do you agree?",
-  "Pay transparency laws will reduce inequality. Discuss.",
-  "Internships should be paid. Do you agree?",
-  // Culture & Media
-  "Traditional culture is being destroyed by global media. Discuss.",
-  "Museums and galleries should be free to the public. Do you agree?",
-  "Reality TV has a negative impact on society. Discuss.",
-  "The government should fund the arts. To what extent do you agree?",
-  "Books will be replaced by digital media. Do you agree?",
-  "People read fewer books today. Is this a problem?",
-  "Cultural appropriation is a serious issue. Discuss.",
-  "Public money should not be spent on celebrating historical events. Discuss.",
-  "Only local films should receive government subsidies. Do you agree?",
-  "Popular culture is more influential than education. Discuss.",
-  // Transport & Urban life
-  "Cities should adopt car-free zones in centers. Do you agree?",
-  "Cycling infrastructure deserves more investment than highways. Discuss.",
-  "High-speed rail is worth the cost. Do you agree?",
-  "Congestion charges are an effective way to reduce traffic. Discuss.",
-  "Short-term rentals (e.g., Airbnb) harm local housing markets. Discuss.",
-  "Urban green spaces should be mandatory in new developments. Do you agree?",
-  "Public transport should be free. Discuss both sides.",
-  "Owning a car should be discouraged in large cities. Do you agree?",
-  "Tall buildings are better than low-rise sprawl. Discuss.",
-  "Smart cities solve urban problems. Do you agree?",
-  // Family & Children
-  "Parents should limit children’s screen time. Do you agree?",
-  "Children should do unpaid work at home to learn responsibility. Discuss.",
-  "Single-sex schools are better for academic achievement. Discuss.",
-  "Grandparents play a more important role than before. Do you agree?",
-  "Teenagers should work part-time while studying. Discuss.",
-  "Parents should be held legally responsible for children’s crimes. Do you agree?",
-  "Children should choose their own career paths without parental pressure. Discuss.",
-  "Competitive sports are essential in school. Do you agree?",
-  "Boarding schools offer better education. Discuss both views.",
-  "Young people should volunteer in their communities. Discuss."
+  "People today are less happy than in the past. Discuss."
 ];
+
 
 // Your personal list of topics
 const PERSONAL_TOPICS = [
-  "The impact of artificial intelligence on the job market.",
-  "Should governments prioritize economic growth or environmental protection?",
-  "The role of social media in modern politics.",
-  "Is a formal university education necessary for success in life?",
-  "The challenges and benefits of remote work."
+  // Philosophy & Rationality
+  "Religion should be kept entirely separate from politics. To what extent do you agree?",
+  "Philosophy should be taught as a compulsory subject in schools. Do you agree or disagree?",
+  "Freedom of thought is more important than national unity. Discuss both views and give your opinion.",
+  "Censorship of ideas does more harm than good. To what extent do you agree?",
+  "A society without religion would be more peaceful. Do you agree or disagree?",
+  "Critical thinking should be the foundation of all education. Discuss.",
+  "Ethics should be taught through philosophy, not religion. To what extent do you agree?",
+  "Individual freedom should always come before collective tradition. Do you agree?",
+  "Atheism is a rational position in the modern world. Discuss both views.",
+  "Moral values are better grounded in reason than in faith. Do you agree or disagree?",
+
+  // Science & Technology
+  "Scientific research should be funded by governments rather than private companies. Do you agree?",
+  "Artificial intelligence will eventually surpass human intelligence. Discuss both sides and give your opinion.",
+  "Space exploration is a luxury when poverty exists on Earth. To what extent do you agree?",
+  "Technology makes people more connected but less humane. Do you agree?",
+  "Genetic engineering should be used to enhance human abilities. Discuss.",
+  "Nuclear power is the best solution to the global energy crisis. Do you agree?",
+  "Robots and automation will create more inequality in society. Discuss both views.",
+  "Social media has weakened democracy. To what extent do you agree?",
+  "Science should always have ethical limits. Do you agree?",
+  "Technology benefits the rich more than the poor. Discuss.",
+
+  // Politics & Economics
+  "Universal basic income is the best solution to poverty caused by automation. Discuss.",
+  "Capitalism increases inequality but also raises living standards. To what extent do you agree?",
+  "Corruption is the biggest obstacle to progress in developing countries. Discuss both sides.",
+  "Globalization has done more harm than good for poor nations. Do you agree?",
+  "Democracy is flawed but still the best form of government. Discuss.",
+  "Wealth should be redistributed through higher taxes on the rich. Do you agree?",
+  "Free trade benefits powerful countries more than weaker ones. Discuss.",
+  "International organizations like the UN are failing to solve global problems. To what extent do you agree?",
+  "Economic growth should not come at the cost of environmental damage. Discuss.",
+  "Inequality is the root cause of most social problems. Do you agree?",
+
+  // Global Problems
+  "Climate change is the greatest threat to humanity. Do you agree or disagree?",
+  "Global poverty cannot be solved without reducing inequality. Discuss.",
+  "War will never disappear from human society. To what extent do you agree?",
+  "Developed countries should take more responsibility for global warming. Do you agree?",
+  "International cooperation is the only way to solve global problems. Discuss both views.",
+  "Refugees should be welcomed by all countries. Do you agree or disagree?",
+  "Human rights should always take priority over economic interests. Discuss.",
+  "The arms trade is one of the main causes of conflict. To what extent do you agree?",
+  "Climate justice requires rich countries to pay for the damage they caused. Discuss.",
+  "World peace is unrealistic. Do you agree or disagree?",
+
+  // Education & Society
+  "Education should focus more on creativity and problem-solving than memorization. Do you agree?",
+  "Madrasa education should include philosophy and science equally. To what extent do you agree?",
+  "Students should learn logic and rational debate before religious studies. Discuss.",
+  "Studying abroad has more benefits than drawbacks. Do you agree?",
+  "Exams are a poor measure of intelligence. To what extent do you agree?",
+  "Education should focus on producing responsible citizens rather than workers. Discuss.",
+  "Schools should teach about poverty and global justice. Do you agree?",
+  "Free access to higher education would reduce inequality. To what extent do you agree?",
+  "The purpose of education is to question authority, not to obey it. Discuss.",
+  "Community service should be a compulsory part of education. Do you agree?"
 ];
+
 
 
 /************************* Helpers *************************/
