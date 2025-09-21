@@ -170,6 +170,7 @@ el('randTopic').addEventListener('click', ()=>{
 el('useCustom').addEventListener('click', ()=>{ el('topicSelect').selectedIndex = 0; el('customTopic').focus(); toggleCustomTopic(); });
 el('clearBtn').addEventListener('click', ()=>{
   el('essay').value=''; el('customTopic').value=''; el('topicSelect').selectedIndex = 0;
+  el('resultsCard').style.display = 'none';
   el('overallBand').textContent='–'; el('breakdownChips').innerHTML='';
   ['crit-ta','crit-cc','crit-lr','crit-gra'].forEach(id=>{ const c=el(id); c.dataset.band=""; c.classList.remove('good','ok','bad'); c.querySelector('.content').innerHTML=""; });
   el('inlinePreview').innerHTML=''; el('errorsList').innerHTML=''; el('refinedEssay').innerHTML=''; el('generalBand9Essay').innerHTML=''; setStatus('');
@@ -410,6 +411,7 @@ el('assessBtn').addEventListener('click', async ()=>{
     // Raw JSON
     // el('rawJson').textContent = JSON.stringify(obj, null, 2);
 
+    el('resultsCard').style.display = 'block';
     setStatus('✅ Assessment complete.');
   }catch(err){
     console.error(err);
