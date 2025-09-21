@@ -139,7 +139,7 @@ function populateTopics(system = 'ielts') {
   sel.innerHTML = ''; // Clear existing options
 
   const topics = system === 'ielts' ? IELTS_TOPICS : PERSONAL_TOPICS;
-  const placeholderText = system === 'ielts' ? "— Choose an IELTS topic —" : "— Choose a Personal topic —";
+  const placeholderText = system === 'ielts' ? "Choose an IELTS topic" : "Choose a Personal topic";
 
   const base = document.createElement('option');
   base.value = "";
