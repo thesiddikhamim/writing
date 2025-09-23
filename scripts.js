@@ -285,7 +285,7 @@ async function callGemini({apiKey, model, prompt, maxTokens=2048}) {
 
 /************************* Prompt Builder *************************/
 function buildPrompt({taskType, topic, essay, targetBand}) {
-  return `You are an official IELTS Writing examiner. Assess the user's writing according to IELTS public band descriptors.Give more inline annotations for Vocabulary I mean better synonym of the basic word I have used.
+  return `You are an official IELTS Writing examiner. Assess the user's writing according to IELTS public band descriptors.
 Return ONLY a valid JSON object. Do not include any text before or after the JSON.
 
 Schema (use these exact keys):
