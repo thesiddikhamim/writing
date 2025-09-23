@@ -282,7 +282,7 @@ Annotation Guidelines:
 - Use the "type" field to categorize the issue:
   - "spelling": A simple spelling mistake.
   - "grammar": An error in sentence structure, tense, punctuation, articles, etc.
-  - "vocabulary": A word that is used incorrectly or could be improved (e.g., less common, more precise). This is for word improvements.
+  - "vocabulary": A word that is used incorrectly or could be improved (e.g., less common, more precise). This is for word improvements. Give more inline annotations for Vocabulary I mean better synonym of the basic word I have used.
   - "cohesion": An issue with linking ideas, sentence flow, or logical connection. This is for making sentences better.
 - Populate the detailed error lists ("grammar_errors", "vocabulary_suggestions", "cohesion_suggestions", "spelling_errors") based on these findings.
 
