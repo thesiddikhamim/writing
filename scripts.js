@@ -316,6 +316,7 @@ Scoring rules:
 - For Task ${taskType}: assess ${taskType==="1"?"Task Achievement (TA)":"Task Response (TR)"}.
 - Use 0–9 bands including .5.
 - Be consistent with IELTS descriptors (relevance, clear position, idea development, paragraphing; cohesion; vocabulary range/accuracy; grammar range/accuracy/punctuation).
+- Give more inline annotations for Vocabulary. I mean so that I can improve my lexical resources.
 - Rewrite the user's essay to a Band 9 level, keeping their core ideas but improving structure, vocabulary, and grammar. Place this in the 'refined_essay' field.
 - If a target band is provided, add advice to reach that band.
 - IMPORTANT: Output MUST be valid JSON only.
