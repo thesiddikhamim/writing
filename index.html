@@ -12,12 +12,11 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="title">IELTS Writing<span class="pill"></span></div>
+      <div class="title">IELTS Writing</div>
       <div style="display: flex; align-items: center; gap: 16px;">
         <div class="chips">
-          <span class="chip">Task 2 Essays</span>
-          <span class="chip">JSON-parsed feedback</span>
-          <span class="chip">100+ topics</span>
+          <!-- <span class="chip">Task 2 Essays</span> -->
+          
         </div>
         <button id="settingsBtn" class="btn ghost" title="Settings" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
       </div>
@@ -52,7 +51,7 @@
         </div>
         <div>
           <label>Max Output Tokens</label>
-          <input id="maxTokens" type="number" value="1000000" min="256" step="128" />
+          <input id="maxTokens" type="number" value="10000000" min="256" step="128" />
         </div>
       </div>
       <div class="controls" style="margin-top: 16px; justify-content: flex-end;">
@@ -63,16 +62,24 @@
     <div class="grid">
       <!-- LEFT: Inputs -->
       <section class="card">
-        <label>Choose an IELTS Topic</label>
+        <label>1. Select Writing System</label>
+        <select id="writingSystem">
+          <option value="ielts" selected>IELTS Task 2 Topics</option>
+          <option value="personal">Personal Topics</option>
+        </select>
+
+        <label style="margin-top:10px">2. Choose a Topic</label>
         <div class="topic-bar">
           <select id="topicSelect"></select>
           <button class="btn" id="randTopic" title="Random topic">Random</button>
           <button class="btn ghost" id="useCustom">Use custom below</button>
         </div>
-        <label style="margin-top:10px">Or write your own topic/question</label>
-        <textarea id="customTopic" placeholder="e.g., Some people think the best way to reduce crime is to give longer prison sentences. Others believe there are better ways to reduce crime. Discuss both views and give your own opinion."></textarea>
+        <div id="customTopicGroup">
+          <label style="margin-top:10px">Or write your own topic/question</label>
+          <textarea id="customTopic" placeholder="e.g., Some people think the best way to reduce crime is to give longer prison sentences. Others believe there are better ways to reduce crime. Discuss both views and give your own opinion."></textarea>
+        </div>
 
-        <label style="margin-top:10px">Your Writing</label>
+        <label style="margin-top:10px">3. Your Writing</label>
         <textarea id="essay" placeholder="Paste or write your full response here..."></textarea>
 
         <div class="controls">
@@ -83,7 +90,7 @@
       </section>
 
       <!-- RIGHT: Results -->
-      <section class="card" id="resultsCard">
+      <section class="card" id="resultsCard" style="display: none;">
         <div class="overall">
           <div>
             <div class="small" style="color:var(--ink-dim)">Overall IELTS Band</div>
@@ -112,14 +119,19 @@
             <ol id="errorsList" class="errors"></ol>
           </div>
            <div class="card" style="background:transparent; border-style:dashed">
-            <h3 style="margin:0 0 8px 0">Band 9 Model Answer</h3>
-            <div class="hint">This is a rewritten version of your essay, demonstrating how to achieve a top score.</div>
+            <h3 style="margin:0 0 8px 0">Your Refined Essay</h3>
+            <div class="hint">This is your own essay, rewritten to a Band 9 level while keeping your core ideas.</div>
             <div id="refinedEssay" class="essay-preview" style="margin-top:10px"></div>
           </div>
-          <details>
+          <div class="card" style="background:transparent; border-style:dashed">
+            <h3 style="margin:0 0 8px 0">Band 9 Answer</h3>
+            <div class="hint">This is an independently written Band 9 model answer for the same topic.</div>
+            <div id="generalBand9Essay" class="essay-preview" style="margin-top:10px"></div>
+          </div>
+          <!-- <details>
             <summary class="small">Show raw JSON (debug)</summary>
             <pre id="rawJson" class="mono"></pre>
-          </details>
+          </details> -->
         </div>
       </section>
     </div>
