@@ -279,8 +279,6 @@ Schema (use these exact keys):
 
  For "vocabulary_suggestions": Focus heavily on vocabulary. Identify basic or common words (e.g., 'good', 'bad', 'important', 'a lot of') and suggest more sophisticated, less common, and precise alternatives. For every common word found, provide advanced synonyms. The goal is to significantly expand the user's lexical resource. For example, instead of 'good', suggest 'beneficial', 'advantageous', 'favorable', 'constructive'. Instead of 'important', suggest 'crucial', 'vital', 'pivotal', 'indispensable'. Create a high volume of these suggestions.
 
-Annotation Guidelines:
-- For "inline_annotations" make the information same from "grammar_errors" = "grammar", "vocabulary_suggestions" = "vocabulary", "cohesion_suggestions"= "cohesion", "spelling_errors" = "spelling"
 
 
 Scoring rules:
