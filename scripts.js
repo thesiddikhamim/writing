@@ -277,14 +277,11 @@ Schema (use these exact keys):
   "general_band9_essay": "string"
 }
 
+ For "vocabulary_suggestions": Focus heavily on vocabulary. Identify basic or common words (e.g., 'good', 'bad', 'important', 'a lot of') and suggest more sophisticated, less common, and precise alternatives. For every common word found, provide advanced synonyms. The goal is to significantly expand the user's lexical resource. For example, instead of 'good', suggest 'beneficial', 'advantageous', 'favorable', 'constructive'. Instead of 'important', suggest 'crucial', 'vital', 'pivotal', 'indispensable'. Create a high volume of these suggestions.
+
 Annotation Guidelines:
-- For "inline_annotations", find the exact quote from the essay.
-- Use the "type" field to categorize the issue:
-  - "spelling": A simple spelling mistake.
-  - "grammar": An error in sentence structure, tense, punctuation, articles, etc.
-  - "vocabulary": A word that is used incorrectly or could be improved (e.g., less common, more precise). This is for word improvements. Give more inline annotations for Vocabulary so that I can enrich my rexical resources. if you find something where I could have used something more advanced or better then give me that.
-  - "cohesion": An issue with linking ideas, sentence flow, or logical connection. This is for making sentences better.
-- Populate the detailed error lists ("grammar_errors", "vocabulary_suggestions", "cohesion_suggestions", "spelling_errors") based on these findings.
+- For "inline_annotations" make the information same from "grammar_errors" = "grammar", "vocabulary_suggestions" = "vocabulary", "cohesion_suggestions"= "cohesion", "spelling_errors" = "spelling"
+
 
 Scoring rules:
 - For Task ${taskType}: assess ${taskType==="1"?"Task Achievement (TA)":"Task Response (TR)"}.
