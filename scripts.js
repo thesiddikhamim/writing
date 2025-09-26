@@ -263,7 +263,7 @@ Schema (use these exact keys):
     "grammatical_range_accuracy": { "band": number, "summary": "string", "issues": ["string"], "advice": ["string"] }
   },
   "inline_annotations": [ { 
-    "quote": "exact substring (<=20 words)", 
+    "quote": "exact substring (for grammar, <=5 words, for vocabulary <=1, for cohesion <=10, for spelling <=1)", 
     "type": "grammar" | "vocabulary" | "cohesion" | "spelling", 
     "reason": "string", 
     "fix": "string" 
@@ -276,7 +276,6 @@ Schema (use these exact keys):
   "refined_essay": "string",
   "general_band9_essay": "string"
 }
-
 Annotation Guidelines:
 - For "inline_annotations", find the exact quote from the essay.
 - Use the "type" field to categorize the issue:
@@ -284,8 +283,9 @@ Annotation Guidelines:
   - "grammar": An error in sentence structure, tense, punctuation, articles, etc.
   - "vocabulary": Focus heavily on vocabulary. Identify basic or common words (e.g., 'good', 'bad', 'important', 'a lot of') and suggest more sophisticated, less common, and precise alternatives. For every common word found, provide multiple advanced synonyms. The goal is to significantly expand the user's lexical resource. For example, instead of 'good', suggest 'beneficial', 'advantageous', 'favorable', 'constructive'. Instead of 'important', suggest 'crucial', 'vital', 'pivotal', 'indispensable'. Create a high volume of these suggestions.
   - "cohesion": An issue with linking ideas, sentence flow, or logical connection. This is for making sentences better.
-- Populate the detailed error lists ("grammar_errors", "vocabulary_suggestions", "cohesion_suggestions", "spelling_errors") based on these findings.
-- For every item you add to 'vocabulary_suggestions', you MUST also create a corresponding 'inline_annotations' entry with 'type': 'vocabulary'.
+ For "inline_annotations": Focus heavily on "vocabulary" and "cohesion". Identify basic or common words (e.g., 'good', 'bad', 'important', 'a lot of') and suggest more sophisticated, less common, and precise alternatives. For every common word found, provide advanced synonyms. The goal is to significantly expand the user's lexical resource. For example, instead of 'good', suggest 'beneficial', 'advantageous', 'favorable', 'constructive'. Instead of 'important', suggest 'crucial', 'vital', 'pivotal', 'indispensable'. Create a high volume of these suggestions.
+
+
 
 Scoring rules:
 - For Task ${taskType}: assess ${taskType==="1"?"Task Achievement (TA)":"Task Response (TR)"}.
