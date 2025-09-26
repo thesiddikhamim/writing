@@ -1,2 +1,2 @@
 # writing
-https://abubakkarhamim.github.io/writing/
+https://thesiddikhamim.github.io/writing/
