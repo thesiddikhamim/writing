@@ -2,6 +2,10 @@ const IELTS_TOPICS = [
   // Education
   "University education should be free for everyone. To what extent do you agree or disagree?",
   "Some people think students should focus on STEM; others say arts are equally important. Discuss both views and give your opinion.",
+  "Online learning will replace classroom learning. Do you agree or disagree?",
+  "Exams are a poor measure of a student’s ability. Discuss both sides and give your opinion.",
+  "Teachers should be paid based on students’ results. To what extent do you agree?",
+  "Children should start formal education at the age of seven. Do you agree or disagree?",
   "Homework should be abolished. Discuss both views and give your opinion.",
   "Studying abroad brings more advantages than disadvantages. Discuss both sides.",
   "Universities should accept equal numbers of male and female students in every subject. Do you agree?",
@@ -278,9 +282,10 @@ Annotation Guidelines:
 - Use the "type" field to categorize the issue:
   - "spelling": A simple spelling mistake.
   - "grammar": An error in sentence structure, tense, punctuation, articles, etc.
-  - "vocabulary": A word that is used incorrectly or could be improved (e.g., less common, more precise). This is for word improvements. Give more inline annotations for Vocabulary I mean better synonym of the basic word I have used.
+  - "vocabulary": Focus heavily on vocabulary. Identify basic or common words (e.g., 'good', 'bad', 'important', 'a lot of') and suggest more sophisticated, less common, and precise alternatives. For every common word found, provide multiple advanced synonyms. The goal is to significantly expand the user's lexical resource. For example, instead of 'good', suggest 'beneficial', 'advantageous', 'favorable', 'constructive'. Instead of 'important', suggest 'crucial', 'vital', 'pivotal', 'indispensable'. Create a high volume of these suggestions.
   - "cohesion": An issue with linking ideas, sentence flow, or logical connection. This is for making sentences better.
 - Populate the detailed error lists ("grammar_errors", "vocabulary_suggestions", "cohesion_suggestions", "spelling_errors") based on these findings.
+- For every item you add to 'vocabulary_suggestions', you MUST also create a corresponding 'inline_annotations' entry with 'type': 'vocabulary'.
 
 Scoring rules:
 - For Task ${taskType}: assess ${taskType==="1"?"Task Achievement (TA)":"Task Response (TR)"}.
@@ -363,129 +368,71 @@ function renderErrors(all){
   (all?.cohesion_suggestions||[]).forEach(c=>{ 
     items.push(`<li><b>Cohesion:</b> ${esc(c.issue)} <br><span class="mono">Fix:</span> ${esc(c.fix)}</li>`); 
   });
-  if (items.length) list.innerHTML = items.join('');
-  else list.innerHTML = `<li>No specific errors found in this category. The inline-view has all the details.</li>`;
+  list.innerHTML = items.length ? items.join('') : '<li class="hint">No detailed issues returned.</li>';
 }
-
-/************************* Unify Annotations *************************/
-function unifyInlineAnnotations(data) {
-  const unified = [...(data.inline_annotations || [])];
-  const seen = new Set((data.inline_annotations || []).map(a => `${a.quote}::${a.type}`));
-
-  const addAnnotation = (item) => {
-    // Basic filter to avoid highlighting single symbols or very short, non-alphanumeric strings.
-    if (!item.quote || item.quote.length < 2 && !/[a-zA-Z0-9]/.test(item.quote)) {
-      return;
-    }
-    const key = `${item.quote}::${item.type}`;
-    if (!seen.has(key)) {
-      unified.push(item);
-      seen.add(key);
-    }
-  };
-
-  (data.grammar_errors || []).forEach(e => addAnnotation({
-    quote: e.error,
-    type: 'grammar',
-    reason: e.why,
-    fix: e.fix
-  }));
-
-  (data.vocabulary_suggestions || []).forEach(e => addAnnotation({
-    quote: e.weak,
-    type: 'vocabulary',
-    reason: e.why,
-    fix: e.better
-  }));
-
-  (data.cohesion_suggestions || []).forEach(e => addAnnotation({
-    quote: e.issue,
-    type: 'cohesion',
-    reason: 'Cohesion improvement',
-    fix: e.fix
-  }));
-
-  (data.spelling_errors || []).forEach(e => addAnnotation({
-    quote: e.error,
-    type: 'spelling',
-    reason: 'Spelling correction',
-    fix: e.fix
-  }));
-
-  return unified;
-}
-
 
 /************************* Main assess flow *************************/
 el('assessBtn').addEventListener('click', async ()=>{
-  setStatus('⏳ Preparing...');
-  el('resultsCard').style.display = 'none';
-
-  try {
+  try{
     const apiKey = el('apiKey').value.trim();
-    const model = el('modelName').value.trim();
+    const model = el('modelName').value.trim() || 'gemini-2.5-flash';
+    const taskType = "2";
+    const topic = el('customTopic').value.trim() || el('topicSelect').value;
     const essay = el('essay').value.trim();
-    const customTopic = el('customTopic').value.trim();
-    const selectedTopic = el('topicSelect').value;
     const targetBand = el('targetBand').value;
-    const maxTokens = el('maxTokens').value;
+    const maxTokens = Number(el('maxTokens').value) || 2048;
 
-    if (!apiKey) {
-      setStatus('❌ Error: Gemini API key is missing. Please add it in Settings.');
-      el('settingsPanel').style.display = 'block';
-      return;
-    }
-    if (!essay) {
-      setStatus('❌ Error: Please enter your essay.');
-      el('essay').focus();
-      return;
-    }
-    const topic = customTopic || selectedTopic;
-    if (!topic) {
-      setStatus('❌ Error: Please select or enter a topic.');
-      return;
-    }
+    if (!apiKey) return setStatus('🔑 Please enter your Gemini API key.');
+    if (!essay) return setStatus('✍️ Please write or paste your essay.');
+    if (!topic) return setStatus('🧠 Please choose a topic or write your own.');
 
-    setStatus('⏳ Building prompt...');
-    const taskType = el('writingSystem').value === 'ielts' ? '2' : 'Personal';
-    const prompt = buildPrompt({ taskType, topic, essay, targetBand });
+    setStatus('⏳ Sending to Gemini…');
 
-    setStatus('⏳ Sending to Gemini...');
-    const text = await callGemini({apiKey, model, prompt, maxTokens});
-    
-    setStatus('⏳ Processing JSON...');
-    const json = tryParseJSON(text);
-    el('resultsCard').style.display = 'block';
+    const prompt = buildPrompt({taskType, topic, essay, targetBand});
+    const jsonText = await callGemini({apiKey, model, prompt, maxTokens});
 
-    // Render overall scores
-    const overall = Number(json.overall_band ?? NaN);
+    // Parse JSON safely
+    let obj = tryParseJSON(jsonText);
+
+    // Minimal validation to avoid undefined crashes
+    if (!obj.breakdown) obj.breakdown = {};
+    ['task_response','coherence_cohesion','lexical_resource','grammatical_range_accuracy'].forEach(k=>{
+      obj.breakdown[k] = obj.breakdown[k] || { band:null, summary:'', issues:[], advice:[] };
+    });
+
+    // Overall
+    const overall = Number(obj?.overall_band ?? NaN);
     el('overallBand').textContent = isFinite(overall) ? overall.toFixed(1).replace(/\.0$/,'') : '–';
-    
-    const breakdown = el('breakdownChips');
-    breakdown.innerHTML = '';
-    breakdown.appendChild(chip(`TA: ${json.breakdown?.task_response?.band || '–'}`));
-    breakdown.appendChild(chip(`CC: ${json.breakdown?.coherence_cohesion?.band || '–'}`));
-    breakdown.appendChild(chip(`LR: ${json.breakdown?.lexical_resource?.band || '–'}`));
-    breakdown.appendChild(chip(`GRA: ${json.breakdown?.grammatical_range_accuracy?.band || '–'}`));
 
-    // Render criteria feedback
-    setCrit('crit-ta', json.breakdown?.task_response);
-    setCrit('crit-cc', json.breakdown?.coherence_cohesion);
-    setCrit('crit-lr', json.breakdown?.lexical_resource);
-    setCrit('crit-gra', json.breakdown?.grammatical_range_accuracy);
+    // Chips
+    const bd = obj.breakdown;
+    const chips = el('breakdownChips'); chips.innerHTML='';
+    const addChip = (label,val)=> chips.appendChild(chip(`${label}: ${isFinite(val)?val.toFixed(1).replace(/\.0$/,''):'–'}`));
+    addChip('TR/TA', Number(bd.task_response.band));
+    addChip('C&C', Number(bd.coherence_cohesion.band));
+    addChip('LR', Number(bd.lexical_resource.band));
+    addChip('GRA', Number(bd.grammatical_range_accuracy.band));
 
-    // Render inline annotations and model answers
-    const unifiedAnnotations = unifyInlineAnnotations(json);
-    renderInline(essay, unifiedAnnotations);
-    renderErrors(json);
-    renderModelAnswer('refinedEssay', json.refined_essay, 'The model did not provide a refined version of your essay.');
-    renderModelAnswer('generalBand9Essay', json.general_band9_essay, 'The model did not provide a Band 9 model answer.');
+    // Criteria sections
+    setCrit('crit-ta', bd.task_response);
+    setCrit('crit-cc', bd.coherence_cohesion);
+    setCrit('crit-lr', bd.lexical_resource);
+    setCrit('crit-gra', bd.grammatical_range_accuracy);
 
+    // Inline highlights and lists
+    renderInline(essay, obj?.inline_annotations);
+    renderErrors(obj);
+    renderModelAnswer('refinedEssay', obj?.refined_essay, 'No refined essay was provided by the model.');
+    renderModelAnswer('generalBand9Essay', obj?.general_band9_essay, 'No general model answer was provided by the model.');
+
+    // Raw JSON
+    // el('rawJson').textContent = JSON.stringify(obj, null, 2);
+
+    el('resultsCard').style.display = 'block';
     setStatus('✅ Assessment complete.');
-
-  } catch (err) {
-    setStatus(`❌ Error: ${err.message}`);
+  }catch(err){
     console.error(err);
+    setStatus('❌ ' + (err?.message || err));
   }
 });
 
