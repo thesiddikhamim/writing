@@ -283,7 +283,7 @@ Inline Annotation Guidelines:
   - "grammar": An error in sentence structure, tense, punctuation, articles, etc.
   - For "inline_annotations": Focus heavily on "vocabulary" and "cohesion". Identify basic or common words (e.g., 'good', 'bad', 'important', 'a lot of') and suggest more sophisticated, less common, and precise alternatives. For every common word found, provide advanced synonyms. The goal is to significantly expand the user's lexical resource. For example, instead of 'good', suggest 'beneficial', 'advantageous', 'favorable', 'constructive'. Instead of 'important', suggest 'crucial', 'vital', 'pivotal', 'indispensable'. Create a high volume of these suggestions.
 
-  - "cohesion": An issue with linking ideas, sentence flow, or logical connection. This is for making sentences better.
+  - "cohesion": An issue with linking ideas, sentence flow, or logical connection. This is for making sentences better. Also focus on this much. 
  
 
 
