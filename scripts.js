@@ -276,15 +276,15 @@ Schema (use these exact keys):
   "refined_essay": "string",
   "general_band9_essay": "string"
 }
-Annotation Guidelines:
+Inline Annotation Guidelines:
 - For "inline_annotations", find the exact quote from the essay.
 - Use the "type" field to categorize the issue:
   - "spelling": A simple spelling mistake.
   - "grammar": An error in sentence structure, tense, punctuation, articles, etc.
-  - "vocabulary": Focus heavily on vocabulary. Identify basic or common words (e.g., 'good', 'bad', 'important', 'a lot of') and suggest more sophisticated, less common, and precise alternatives. For every common word found, provide multiple advanced synonyms. The goal is to significantly expand the user's lexical resource. For example, instead of 'good', suggest 'beneficial', 'advantageous', 'favorable', 'constructive'. Instead of 'important', suggest 'crucial', 'vital', 'pivotal', 'indispensable'. Create a high volume of these suggestions.
-  - "cohesion": An issue with linking ideas, sentence flow, or logical connection. This is for making sentences better.
- For "inline_annotations": Focus heavily on "vocabulary" and "cohesion". Identify basic or common words (e.g., 'good', 'bad', 'important', 'a lot of') and suggest more sophisticated, less common, and precise alternatives. For every common word found, provide advanced synonyms. The goal is to significantly expand the user's lexical resource. For example, instead of 'good', suggest 'beneficial', 'advantageous', 'favorable', 'constructive'. Instead of 'important', suggest 'crucial', 'vital', 'pivotal', 'indispensable'. Create a high volume of these suggestions.
+  - For "inline_annotations": Focus heavily on "vocabulary" and "cohesion". Identify basic or common words (e.g., 'good', 'bad', 'important', 'a lot of') and suggest more sophisticated, less common, and precise alternatives. For every common word found, provide advanced synonyms. The goal is to significantly expand the user's lexical resource. For example, instead of 'good', suggest 'beneficial', 'advantageous', 'favorable', 'constructive'. Instead of 'important', suggest 'crucial', 'vital', 'pivotal', 'indispensable'. Create a high volume of these suggestions.
 
+  - "cohesion": An issue with linking ideas, sentence flow, or logical connection. This is for making sentences better.
+ 
 
 
 Scoring rules:
