@@ -10,17 +10,19 @@ const IELTS_TOPICS = [
   "Studying abroad brings more advantages than disadvantages. Discuss both sides.",
   "Universities should accept equal numbers of male and female students in every subject. Do you agree?",
   "The main purpose of education is to prepare people for the workplace. How far do you agree?",
+
   // Technology
   "The growth of social media has damaged face-to-face communication. To what extent do you agree?",
   "Artificial intelligence will create more jobs than it destroys. Discuss both sides and give your opinion.",
   "Governments should regulate screen time for children. To what extent do you agree?",
   "Technology has made people less creative. Do you agree or disagree?",
-  "Cybersecurity should be taught in schools. Do you agree?",
-  "Facial recognition in public spaces should be banned. Discuss.",
   "People rely too much on smartphones. To what extent do you agree?",
   "Space exploration is a waste of resources. Discuss both views.",
   "Digital payments will replace cash completely. Do you agree?",
   "Online privacy is more important than national security. Discuss.",
+  "Facial recognition in public spaces should be banned. Discuss.",
+  "Cybersecurity should be taught in schools. Do you agree?",
+
   // Environment
   "Climate change is the biggest threat facing humanity. Do you agree or disagree?",
   "Plastic bans are effective in reducing pollution. Discuss both sides and give your opinion.",
@@ -32,6 +34,7 @@ const IELTS_TOPICS = [
   "Ecotourism brings more harm than good. To what extent do you agree?",
   "Nuclear energy is the answer to the energy crisis. Discuss both sides.",
   "Recycling is not enough; we must reduce consumption. Do you agree?",
+
   // Health
   "Governments should tax sugary drinks to improve public health. Do you agree?",
   "Mental health should be treated on par with physical health. Discuss.",
@@ -43,7 +46,8 @@ const IELTS_TOPICS = [
   "Universal healthcare should be a basic right. Discuss both views.",
   "The fitness industry does more harm than good. Discuss.",
   "Schools should provide free nutritious lunches. To what extent do you agree?",
-  // Society
+
+  // Society & Work
   "Crime can be reduced with longer prison sentences. Others say education and rehabilitation are better. Discuss both views and give your opinion.",
   "Censorship of the internet is necessary in some cases. Discuss.",
   "Aging populations will cause serious problems for society. Discuss solutions.",
@@ -53,150 +57,74 @@ const IELTS_TOPICS = [
   "Tourism brings more benefits than problems. Discuss both sides.",
   "City life is better than country life. Discuss both views.",
   "Consumerism is damaging our society. Do you agree?",
-  "People today are less happy than in the past. Discuss.",
-  // Work & Economy
-  "Remote work will remain the norm. Do you agree or disagree?",
-  "A universal basic income is the best response to automation. Discuss.",
-  "Job satisfaction is more important than job security. To what extent do you agree?",
-  "Employers should monitor employees’ emails and internet use. Do you agree?",
-  "Gig-economy jobs exploit workers. Discuss.",
-  "Globalization has more benefits than drawbacks. Discuss both views.",
-  "Tourism is a vital source of income but can ruin local cultures. Discuss.",
-  "International trade should be fairer rather than freer. Do you agree?",
-  "Pay transparency laws will reduce inequality. Discuss.",
-  "Internships should be paid. Do you agree?",
-  // Culture & Media
-  "Traditional culture is being destroyed by global media. Discuss.",
-  "Museums and galleries should be free to the public. Do you agree?",
-  "Reality TV has a negative impact on society. Discuss.",
-  "The government should fund the arts. To what extent do you agree?",
-  "Books will be replaced by digital media. Do you agree?",
-  "People read fewer books today. Is this a problem?",
-  "Cultural appropriation is a serious issue. Discuss.",
-  "Public money should not be spent on celebrating historical events. Discuss.",
-  "Only local films should receive government subsidies. Do you agree?",
-  "Popular culture is more influential than education. Discuss.",
-  // Transport & Urban life
-  "Cities should adopt car-free zones in centers. Do you agree?",
-  "Cycling infrastructure deserves more investment than highways. Discuss.",
-  "High-speed rail is worth the cost. Do you agree?",
-  "Congestion charges are an effective way to reduce traffic. Discuss.",
-  "Short-term rentals (e.g., Airbnb) harm local housing markets. Discuss.",
-  "Urban green spaces should be mandatory in new developments. Do you agree?",
-  "Public transport should be free. Discuss both sides.",
-  "Owning a car should be discouraged in large cities. Do you agree?",
-  "Tall buildings are better than low-rise sprawl. Discuss.",
-  "Smart cities solve urban problems. Do you agree?",
-  // Family & Children
-  "Parents should limit children’s screen time. Do you agree?",
-  "Children should do unpaid work at home to learn responsibility. Discuss.",
-  "Single-sex schools are better for academic achievement. Discuss.",
-  "Grandparents play a more important role than before. Do you agree?",
-  "Teenagers should work part-time while studying. Discuss.",
-  "Parents should be held legally responsible for children’s crimes. Do you agree?",
-  "Children should choose their own career paths without parental pressure. Discuss.",
-  "Competitive sports are essential in school. Do you agree?",
-  "Boarding schools offer better education. Discuss both views.",
-  "Young people should volunteer in their communities. Discuss.",
-  "University education should be free for everyone. To what extent do you agree or disagree?",
-  "Some people think students should focus on STEM; others say arts are equally important. Discuss both views and give your opinion.",
-  "Online learning will replace classroom learning. Do you agree or disagree?",
-  "Exams are a poor measure of a student’s ability. Discuss both sides and give your opinion.",
-  "Teachers should be paid based on students’ results. To what extent do you agree?",
-  "Children should start formal education at the age of seven. Do you agree or disagree?",
-  "Homework should be abolished. Discuss both views and give your opinion.",
-  "Studying abroad brings more advantages than disadvantages. Discuss both sides.",
-  "Universities should accept equal numbers of male and female students in every subject. Do you agree?",
-  "The main purpose of education is to prepare people for the workplace. How far do you agree?",
-  // Technology
-  "The growth of social media has damaged face-to-face communication. To what extent do you agree?",
-  "Artificial intelligence will create more jobs than it destroys. Discuss both sides and give your opinion.",
-  "Governments should regulate screen time for children. To what extent do you agree?",
-  "Technology has made people less creative. Do you agree or disagree?",
-  "Cybersecurity should be taught in schools. Do you agree?",
-  "Facial recognition in public spaces should be banned. Discuss.",
-  "People rely too much on smartphones. To what extent do you agree?",
-  "Space exploration is a waste of resources. Discuss both views.",
-  "Digital payments will replace cash completely. Do you agree?",
-  "Online privacy is more important than national security. Discuss.",
-  // Environment
-  "Climate change is the biggest threat facing humanity. Do you agree or disagree?",
-  "Plastic bans are effective in reducing pollution. Discuss both sides and give your opinion.",
-  "Governments should invest more in public transport than in roads. To what extent do you agree?",
-  "Individuals can do little to improve the environment. Do you agree?",
-  "The best way to tackle traffic congestion is to increase fuel prices. Discuss.",
-  "Countries should be penalized for exceeding carbon limits. Do you agree?",
-  "Plant-based diets should be encouraged to protect the environment. Discuss.",
-  "Ecotourism brings more harm than good. To what extent do you agree?",
-  "Nuclear energy is the answer to the energy crisis. Discuss both sides.",
-  "Recycling is not enough; we must reduce consumption. Do you agree?",
-  // Health
-  "Governments should tax sugary drinks to improve public health. Do you agree?",
-  "Mental health should be treated on par with physical health. Discuss.",
-  "Public money should be used to promote healthy lifestyles rather than to treat illnesses. To what extent do you agree?",
-  "Advertising of fast food to children should be banned. Discuss.",
-  "Alternative medicine is not effective and should be discouraged. Do you agree?",
-  "Work-life balance is more important than salary. Discuss.",
-  "Sports stars are overpaid. Do you agree or disagree?",
-  "Universal healthcare should be a basic right. Discuss both views.",
-  "The fitness industry does more harm than good. Discuss.",
-  "Schools should provide free nutritious lunches. To what extent do you agree?",
-  // Society
-  "Crime can be reduced with longer prison sentences. Others say education and rehabilitation are better. Discuss both views and give your opinion.",
-  "Censorship of the internet is necessary in some cases. Discuss.",
-  "Aging populations will cause serious problems for society. Discuss solutions.",
-  "Some people think that parents are the best teachers. Do you agree?",
-  "Multicultural societies are more creative. To what extent do you agree?",
-  "Celebrities should not be role models. Discuss.",
-  "Tourism brings more benefits than problems. Discuss both sides.",
-  "City life is better than country life. Discuss both views.",
-  "Consumerism is damaging our society. Do you agree?",
-  "People today are less happy than in the past. Discuss.",
-  // Work & Economy
-  "Remote work will remain the norm. Do you agree or disagree?",
-  "A universal basic income is the best response to automation. Discuss.",
-  "Job satisfaction is more important than job security. To what extent do you agree?",
-  "Employers should monitor employees’ emails and internet use. Do you agree?",
-  "Gig-economy jobs exploit workers. Discuss.",
-  "Globalization has more benefits than drawbacks. Discuss both views.",
-  "Tourism is a vital source of income but can ruin local cultures. Discuss.",
-  "International trade should be fairer rather than freer. Do you agree?",
-  "Pay transparency laws will reduce inequality. Discuss.",
-  "Internships should be paid. Do you agree?",
-  // Culture & Media
-  "Traditional culture is being destroyed by global media. Discuss.",
-  "Museums and galleries should be free to the public. Do you agree?",
-  "Reality TV has a negative impact on society. Discuss.",
-  "The government should fund the arts. To what extent do you agree?",
-  "Books will be replaced by digital media. Do you agree?",
-  "People read fewer books today. Is this a problem?",
-  "Cultural appropriation is a serious issue. Discuss.",
-  "Public money should not be spent on celebrating historical events. Discuss.",
-  "Only local films should receive government subsidies. Do you agree?",
-  "Popular culture is more influential than education. Discuss.",
-  // Transport & Urban life
-  "Cities should adopt car-free zones in centers. Do you agree?",
-  "Cycling infrastructure deserves more investment than highways. Discuss.",
-  "High-speed rail is worth the cost. Do you agree?",
-  "Congestion charges are an effective way to reduce traffic. Discuss.",
-  "Short-term rentals (e.g., Airbnb) harm local housing markets. Discuss.",
-  "Urban green spaces should be mandatory in new developments. Do you agree?",
-  "Public transport should be free. Discuss both sides.",
-  "Owning a car should be discouraged in large cities. Do you agree?",
-  "Tall buildings are better than low-rise sprawl. Discuss.",
-  "Smart cities solve urban problems. Do you agree?",
-  // Family & Children
-  "Parents should limit children’s screen time. Do you agree?",
-  "Children should do unpaid work at home to learn responsibility. Discuss.",
-  "Single-sex schools are better for academic achievement. Discuss.",
-  "Grandparents play a more important role than before. Do you agree?",
-  "Teenagers should work part-time while studying. Discuss.",
-  "Parents should be held legally responsible for children’s crimes. Do you agree?",
-  "Children should choose their own career paths without parental pressure. Discuss.",
-  "Competitive sports are essential in school. Do you agree?",
-  "Boarding schools offer better education. Discuss both views.",
-  "Young people should volunteer in their communities. Discuss."
+  "People today are less happy than in the past. Discuss."
 ];
+
+
+// Your personal list of topics
+const PERSONAL_TOPICS = [
+  // Philosophy & Rationality
+  "Religion should be kept entirely separate from politics. To what extent do you agree?",
+  "Philosophy should be taught as a compulsory subject in schools. Do you agree or disagree?",
+  "Freedom of thought is more important than national unity. Discuss both views and give your opinion.",
+  "Censorship of ideas does more harm than good. To what extent do you agree?",
+  "A society without religion would be more peaceful. Do you agree or disagree?",
+  "Critical thinking should be the foundation of all education. Discuss.",
+  "Ethics should be taught through philosophy, not religion. To what extent do you agree?",
+  "Individual freedom should always come before collective tradition. Do you agree?",
+  "Atheism is a rational position in the modern world. Discuss both views.",
+  "Moral values are better grounded in reason than in faith. Do you agree or disagree?",
+
+  // Science & Technology
+  "Scientific research should be funded by governments rather than private companies. Do you agree?",
+  "Artificial intelligence will eventually surpass human intelligence. Discuss both sides and give your opinion.",
+  "Space exploration is a luxury when poverty exists on Earth. To what extent do you agree?",
+  "Technology makes people more connected but less humane. Do you agree?",
+  "Genetic engineering should be used to enhance human abilities. Discuss.",
+  "Nuclear power is the best solution to the global energy crisis. Do you agree?",
+  "Robots and automation will create more inequality in society. Discuss both views.",
+  "Social media has weakened democracy. To what extent do you agree?",
+  "Science should always have ethical limits. Do you agree?",
+  "Technology benefits the rich more than the poor. Discuss.",
+
+  // Politics & Economics
+  "Universal basic income is the best solution to poverty caused by automation. Discuss.",
+  "Capitalism increases inequality but also raises living standards. To what extent do you agree?",
+  "Corruption is the biggest obstacle to progress in developing countries. Discuss both sides.",
+  "Globalization has done more harm than good for poor nations. Do you agree?",
+  "Democracy is flawed but still the best form of government. Discuss.",
+  "Wealth should be redistributed through higher taxes on the rich. Do you agree?",
+  "Free trade benefits powerful countries more than weaker ones. Discuss.",
+  "International organizations like the UN are failing to solve global problems. To what extent do you agree?",
+  "Economic growth should not come at the cost of environmental damage. Discuss.",
+  "Inequality is the root cause of most social problems. Do you agree?",
+
+  // Global Problems
+  "Climate change is the greatest threat to humanity. Do you agree or disagree?",
+  "Global poverty cannot be solved without reducing inequality. Discuss.",
+  "War will never disappear from human society. To what extent do you agree?",
+  "Developed countries should take more responsibility for global warming. Do you agree?",
+  "International cooperation is the only way to solve global problems. Discuss both views.",
+  "Refugees should be welcomed by all countries. Do you agree or disagree?",
+  "Human rights should always take priority over economic interests. Discuss.",
+  "The arms trade is one of the main causes of conflict. To what extent do you agree?",
+  "Climate justice requires rich countries to pay for the damage they caused. Discuss.",
+  "World peace is unrealistic. Do you agree or disagree?",
+
+  // Education & Society
+  "Education should focus more on creativity and problem-solving than memorization. Do you agree?",
+  "Madrasa education should include philosophy and science equally. To what extent do you agree?",
+  "Students should learn logic and rational debate before religious studies. Discuss.",
+  "Studying abroad has more benefits than drawbacks. Do you agree?",
+  "Exams are a poor measure of intelligence. To what extent do you agree?",
+  "Education should focus on producing responsible citizens rather than workers. Discuss.",
+  "Schools should teach about poverty and global justice. Do you agree?",
+  "Free access to higher education would reduce inequality. To what extent do you agree?",
+  "The purpose of education is to question authority, not to obey it. Discuss.",
+  "Community service should be a compulsory part of education. Do you agree?"
+];
+
+
 
 /************************* Helpers *************************/
 const el = id => document.getElementById(id);
@@ -206,13 +134,28 @@ function chip(label){ const s=document.createElement('span'); s.className='chip'
 function esc(s){ return (s||"").toString().replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
 
 /************************* Populate topics *************************/
-(function initTopics(){
+function populateTopics(system = 'ielts') {
   const sel = el('topicSelect');
+  sel.innerHTML = ''; // Clear existing options
+
+  const topics = system === 'ielts' ? IELTS_TOPICS : PERSONAL_TOPICS;
+  const placeholderText = system === 'ielts' ? "Choose an IELTS topic" : "Choose a Personal topic";
+
   const base = document.createElement('option');
-  base.value=""; base.textContent="— Choose an IELTS topic —";
+  base.value = "";
+  base.textContent = placeholderText;
   sel.appendChild(base);
-  IELTS_TOPICS.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
-})();
+
+  topics.forEach(t => {
+    const o = document.createElement('option');
+    o.value = t;
+    o.textContent = t;
+    sel.appendChild(o);
+  });
+}
+
+// Initial population
+populateTopics();
 
 /************************* Local storage *************************/
 (function restore(){
@@ -221,22 +164,42 @@ function esc(s){ return (s||"").toString().replace(/[&<>"']/g, m=>({ '&':'&amp;'
 })();
 
 /************************* Events *************************/
-el('randTopic').addEventListener('click', ()=>{
-  const idx = 1 + Math.floor(Math.random() * IELTS_TOPICS.length);
-  el('topicSelect').selectedIndex = idx; el('customTopic').value = '';
+function toggleCustomTopic(){
+  const showCustom = el('topicSelect').value === '';
+  el('customTopicGroup').style.display = showCustom ? 'block' : 'none';
+}
+
+el('writingSystem').addEventListener('change', (e) => {
+  populateTopics(e.target.value);
+  toggleCustomTopic();
 });
-el('useCustom').addEventListener('click', ()=>{ el('topicSelect').selectedIndex = 0; el('customTopic').focus(); });
+
+el('topicSelect').addEventListener('change', toggleCustomTopic);
+
+el('randTopic').addEventListener('click', ()=>{
+  const system = el('writingSystem').value;
+  const topics = system === 'ielts' ? IELTS_TOPICS : PERSONAL_TOPICS;
+  const idx = 1 + Math.floor(Math.random() * topics.length);
+  el('topicSelect').selectedIndex = idx; el('customTopic').value = '';
+  toggleCustomTopic();
+});
+el('useCustom').addEventListener('click', ()=>{ el('topicSelect').selectedIndex = 0; el('customTopic').focus(); toggleCustomTopic(); });
 el('clearBtn').addEventListener('click', ()=>{
-  el('essay').value=''; el('customTopic').value='';
+  el('essay').value=''; el('customTopic').value=''; el('topicSelect').selectedIndex = 0;
+  el('resultsCard').style.display = 'none';
   el('overallBand').textContent='–'; el('breakdownChips').innerHTML='';
   ['crit-ta','crit-cc','crit-lr','crit-gra'].forEach(id=>{ const c=el(id); c.dataset.band=""; c.classList.remove('good','ok','bad'); c.querySelector('.content').innerHTML=""; });
-  el('inlinePreview').innerHTML=''; el('errorsList').innerHTML=''; el('rawJson').textContent=''; el('refinedEssay').innerHTML=''; setStatus('');
+  el('inlinePreview').innerHTML=''; el('errorsList').innerHTML=''; el('refinedEssay').innerHTML=''; el('generalBand9Essay').innerHTML=''; setStatus('');
+  toggleCustomTopic();
 });
 el('saveBtn').addEventListener('click', ()=>{
   localStorage.setItem('gemini_api_key', el('apiKey').value.trim());
   localStorage.setItem('gemini_model', el('modelName').value.trim());
   setStatus('✅ API key & model saved locally.');
 });
+
+// Set initial state on load
+toggleCustomTopic();
 
 /************************* JSON extraction + repair *************************/
 function tryParseJSON(text){
@@ -300,7 +263,7 @@ Schema (use these exact keys):
     "grammatical_range_accuracy": { "band": number, "summary": "string", "issues": ["string"], "advice": ["string"] }
   },
   "inline_annotations": [ { 
-    "quote": "exact substring (<=20 words)", 
+    "quote": "exact substring (for grammar, <=5 words, for vocabulary <=1, for cohesion <=10, for spelling <=1)", 
     "type": "grammar" | "vocabulary" | "cohesion" | "spelling", 
     "reason": "string", 
     "fix": "string" 
@@ -308,15 +271,28 @@ Schema (use these exact keys):
   "grammar_errors": [ { "error": "string", "why": "string", "fix": "string" } ],
   "vocabulary_suggestions": [ { "weak": "string", "better": "string", "why": "string" } ],
   "cohesion_suggestions": [ { "issue": "string", "fix": "string" } ],
+  "spelling_errors": [ { "error": "string", "fix": "string" } ],
   "task_specific_advice": "string",
-  "refined_essay": "string"
+  "refined_essay": "string",
+  "general_band9_essay": "string"
 }
+Inline Annotation Guidelines:
+- For "inline_annotations", find the exact quote from the essay.
+- Use the "type" field to categorize the issue:
+  - "spelling": A simple spelling mistake.
+  - "grammar": An error in sentence structure, tense, punctuation, articles, etc.
+  - For "inline_annotations": Focus heavily on "vocabulary" and "cohesion". Identify basic or common words (e.g., 'good', 'bad', 'important', 'a lot of') and suggest more sophisticated, less common, and precise alternatives. For every common word found, provide advanced synonyms. The goal is to significantly expand the user's lexical resource. For example, instead of 'good', suggest 'beneficial', 'advantageous', 'favorable', 'constructive'. Instead of 'important', suggest 'crucial', 'vital', 'pivotal', 'indispensable'. Create a high volume of these suggestions.
+
+  - "cohesion": An issue with linking ideas, sentence flow, or logical connection. This is for making sentences better. Also focus on this much. 
+ 
+
 
 Scoring rules:
 - For Task ${taskType}: assess ${taskType==="1"?"Task Achievement (TA)":"Task Response (TR)"}.
 - Use 0–9 bands including .5.
 - Be consistent with IELTS descriptors (relevance, clear position, idea development, paragraphing; cohesion; vocabulary range/accuracy; grammar range/accuracy/punctuation).
 - Rewrite the user's essay to a Band 9 level, keeping their core ideas but improving structure, vocabulary, and grammar. Place this in the 'refined_essay' field.
+- Additionally, write a completely new, independent Band 9 model answer on the same topic. Place this in the 'general_band9_essay' field.
 - If a target band is provided, add advice to reach that band.
 - IMPORTANT: Output MUST be valid JSON only.
 
@@ -366,12 +342,12 @@ function renderInline(essay, inline){
   el('inlinePreview').innerHTML = html;
 }
 
-function renderRefinedEssay(text){
-  const container = el('refinedEssay');
+function renderModelAnswer(elementId, text, defaultMessage) {
+  const container = el(elementId);
   if (text && typeof text === 'string' && text.trim() !== '') {
     container.textContent = text;
   } else {
-    container.innerHTML = '<span class="hint">No refined essay was provided by the model.</span>';
+    container.innerHTML = `<span class="hint">${defaultMessage}</span>`;
   }
 }
 
@@ -446,11 +422,13 @@ el('assessBtn').addEventListener('click', async ()=>{
     // Inline highlights and lists
     renderInline(essay, obj?.inline_annotations);
     renderErrors(obj);
-    renderRefinedEssay(obj?.refined_essay);
+    renderModelAnswer('refinedEssay', obj?.refined_essay, 'No refined essay was provided by the model.');
+    renderModelAnswer('generalBand9Essay', obj?.general_band9_essay, 'No general model answer was provided by the model.');
 
     // Raw JSON
-    el('rawJson').textContent = JSON.stringify(obj, null, 2);
+    // el('rawJson').textContent = JSON.stringify(obj, null, 2);
 
+    el('resultsCard').style.display = 'block';
     setStatus('✅ Assessment complete.');
   }catch(err){
     console.error(err);
