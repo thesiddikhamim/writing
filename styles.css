@@ -289,7 +289,7 @@ textarea {
 /* Tooltip */
 /* Tooltip base */
 .inline-err {
-  position: relative; /* makes this element the reference point */
+  position: unset; /* makes this element the reference point */
   cursor: pointer;
 }
 
