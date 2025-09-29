@@ -287,13 +287,21 @@ textarea {
 }
 
 /* Tooltip */
+/* Tooltip base */
+.inline-err {
+  position: relative; /* makes this element the reference point */
+  cursor: pointer;
+}
+
+/* Tooltip bubble */
 .inline-err:hover::after,
 .inline-err:active::after {
   content: attr(title);
-  position: unset;
-  bottom: 50%;
+  position: absolute;
+  top: 100%; /* show below the element */
   left: 50%;
   transform: translateX(-50%);
+  
   padding: 6px 10px;
   border-radius: 6px;
   background: #000000;
@@ -301,12 +309,22 @@ textarea {
   color: var(--accent);
   font-size: 12px;
   white-space: normal;
-  min-width: 200px;
-  max-width: 300px;
+  min-width: 160px;
+  max-width: 260px;
   width: max-content;
   z-index: 100;
-  transition: none;
   line-height: 1.4;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Fade-in effect */
+.inline-err:hover::after,
+.inline-err:active::after {
+  opacity: 1;
+  transform: translate(-50%, 4px); /* shift down slightly on show */
 }
 
 /* ==========================================================================
